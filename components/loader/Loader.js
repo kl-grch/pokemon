@@ -6,8 +6,8 @@ export default function Loader() {
             <Image
             src='/images/whos_that_pokemon.png'
             alt='Loading'
-            width={475}
-            height={475}/>
+            width={350}
+            height={350}/>
         </div>
     )
 };

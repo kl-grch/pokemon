@@ -28,8 +28,8 @@ function Pokemon({ id }) {
       <Image
         src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${data.id}.png`}
         alt={data.name}
-        width={475}
-        height={475}
+        width={350}
+        height={350}
       />
       <h2 style={{ textAlign: "center" }}>{updateName}</h2>
     </div>
