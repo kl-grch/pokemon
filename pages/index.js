@@ -1,23 +1,17 @@
 import Head from "next/head";
 import Image from "next/image";
 import styles from "@/styles/Home.module.css";
-import useSWR from "swr";
 import { useState } from "react";
 import { Button } from "react-bootstrap";
-import Link from "next/link";
 import Layout from "@/components/layout/Layout";
 import clsx from "clsx";
 import Loader from "@/components/loader/Loader";
-
-const fetcher = (url) => fetch(url).then((res) => res.json());
+import { usePokemon } from "@/hooks/usePokemon";
 
 function Pokemon({ id }) {
-  const { data, error, isLoading } = useSWR(
-    `https://pokeapi.co/api/v2/pokemon/${id}/`,
-    fetcher
-  );
+  const { data, error, isLoading } = usePokemon(id);
 
-  if (error) return <div>error loading</div>;
+  if (error) return <div>Error loading</div>;
   if (isLoading) return <Loader />;
 
   const updateName = data.name.charAt(0).toUpperCase() + data.name.slice(1);
@@ -45,6 +39,10 @@ export default function Home() {
     return setCount((count = 1008));
   }
 
+  const randomPokemon = () => {
+    setCount(Math.floor(Math.random() * (1008 - 1 + 1)) + 1);
+  };
+
   return (
     <Layout home>
       <Head>
@@ -57,11 +55,14 @@ export default function Home() {
         <Pokemon id={count} />
         <p>Pokemon: {count} of 1008</p>
         <div style={{ display: "flex", gap: 10 }}>
-          <Button variant="danger" onClick={() => setCount(count - 1)}>
-            Prev
+          <Button variant="warning" onClick={() => setCount(count - 1)}>
+            <i class="bi bi-caret-left-fill"></i> Prev
+          </Button>
+          <Button variant="secondary" onClick={randomPokemon}>
+            <i class="bi bi-shuffle"></i>
           </Button>
           <Button variant="warning" onClick={() => setCount(count + 1)}>
-            Next
+            Next <i class="bi bi-caret-right-fill"></i>
           </Button>
         </div>
       </main>
