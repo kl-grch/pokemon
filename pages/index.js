@@ -43,6 +43,14 @@ export default function Home() {
     setCount(Math.floor(Math.random() * (1008 - 1 + 1)) + 1);
   };
 
+  const getNextPokemon = () => {
+    setTimeout(() => setCount(count + 1), 1000);
+  };
+
+  const getPrevPokemon = () => {
+    setTimeout(() => setCount(count - 1), 1000);
+  };
+
   return (
     <Layout home>
       <Head>
@@ -55,13 +63,13 @@ export default function Home() {
         <Pokemon id={count} />
         <p>Pokemon: {count} of 1008</p>
         <div style={{ display: "flex", gap: 10 }}>
-          <Button variant="warning" onClick={() => setCount(count - 1)}>
+          <Button variant="warning" onClick={getPrevPokemon}>
             <i class="bi bi-caret-left-fill"></i> Prev
           </Button>
           <Button variant="secondary" onClick={randomPokemon}>
             <i class="bi bi-shuffle"></i>
           </Button>
-          <Button variant="warning" onClick={() => setCount(count + 1)}>
+          <Button variant="warning" onClick={getNextPokemon}>
             Next <i class="bi bi-caret-right-fill"></i>
           </Button>
         </div>
